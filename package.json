@@ -1,6 +1,6 @@
 {
   "name": "fe-conf",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "基础的前端项目配置生成器，适合项目初始化的时候使用，或者完善当前项目的配置。生成的配置文件只作为通用设置，具体项目仍然需要做进一步修改以适配项目需要。",
   "homepage": "https://github.com/turing-fe/config-generator#readme",
   "bugs": {
@@ -31,14 +31,14 @@
   "dependencies": {
     "ejs": "^3.1.6",
     "fast-glob": "^3.2.5",
+    "fs-extra": "^9.1.0",
     "prompts": "^2.4.0",
     "shelljs": "^0.8.4",
-    "fs-extra": "^9.1.0",
     "sort-package-json": "^1.49.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^12.0.1",
-    "@commitlint/config-conventional": "^12.0.1",
+    "@commitlint/cli": "^12.1.1",
+    "@commitlint/config-conventional": "^12.1.1",
     "@types/ejs": "^3.0.6",
     "@types/fs-extra": "^9.0.9",
     "@types/node": "^14.14.35",

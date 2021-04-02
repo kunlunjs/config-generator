@@ -81,6 +81,8 @@ export default async function run(selectedConfigKeys: AvailableConfigs[]) {
             : generator.devDependencies),
         )
       }
+    } else {
+      log(key, 'Existed.')
     }
   }
   // 安装依赖

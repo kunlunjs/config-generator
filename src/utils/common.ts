@@ -115,7 +115,7 @@ export async function updatePkg(
 export function configInPackageJSON(keys: string[]) {
   getPkgInfo()
   if (pkg) {
-    return keys.some(key => !(key in pkg!))
+    return keys.some(key => key in pkg!)
   }
   return false
 }
