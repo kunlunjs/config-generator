@@ -1,4 +1,4 @@
-import { exec, spawn } from 'child_process'
+import { spawn } from 'child_process'
 
 export function runCommand(command: string): Promise<boolean> {
   return new Promise(resolve => {

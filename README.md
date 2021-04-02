@@ -6,13 +6,13 @@
 
 ```bash
 # 全局安装
-npm i -g @kunlun/gconf
+npm i -g fe-conf
 # 或者
-yarn global add @kunlun/gconf
+yarn global add fe-conf
 # 然后进行配置生成
-kl-conf
+fe-conf
 # 或者跳过全局安装直接使用
-npx kl-conf
+npx fe-conf
 ```
 
 ## 生成的配置

@@ -1,6 +1,6 @@
 {
-  "name": "@kunlun/gconf",
-  "version": "0.1.0",
+  "name": "fe-conf",
+  "version": "0.1.4",
   "description": "基础的前端项目配置生成器，适合项目初始化的时候使用，或者完善当前项目的配置。生成的配置文件只作为通用设置，具体项目仍然需要做进一步修改以适配项目需要。",
   "homepage": "https://github.com/turing-fe/config-generator#readme",
   "bugs": {
@@ -18,11 +18,12 @@
     "dist"
   ],
   "bin": {
-    "kl-conf": "./bin/main.js"
+    "fe-conf": "./bin/main.js"
   },
   "scripts": {
     "postinstall": "husky install",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "npm run build && ts-node scripts/publish.ts before",
+    "postpublish": "ts-node scripts/publish.ts after",
     "lint": "eslint ./ --ext js,ts,tsx,json --quiet --fix",
     "build": "tsc",
     "start": "ts-node bin/main.ts"
@@ -32,6 +33,7 @@
     "fast-glob": "^3.2.5",
     "prompts": "^2.4.0",
     "shelljs": "^0.8.4",
+    "fs-extra": "^9.1.0",
     "sort-package-json": "^1.49.0"
   },
   "devDependencies": {
@@ -50,7 +52,6 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-promise": "^4.3.1",
-    "fs-extra": "^9.1.0",
     "husky": "^6.0.0",
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",

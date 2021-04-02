@@ -10,7 +10,7 @@ import glob = require('fast-glob')
 import { ColorEnum, colorful } from './color'
 
 interface PackageJson {
-  [key: string]: any
+  [key: string]: unknown
 }
 
 let pkg: PackageJson | null = null
@@ -21,8 +21,11 @@ let pkg: PackageJson | null = null
  * @param opt 传入配置
  * @returns 综合后的配置
  */
-type Option = Record<string, unknown>
-export function loadOption<Option>(defaultOpt: Option, opt?: Option): Option {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function loadOption<ArgOption extends Record<string, any>>(
+  defaultOpt: ArgOption,
+  opt?: ArgOption,
+): ArgOption {
   return { ...defaultOpt, ...(opt || {}) }
 }
 
@@ -86,7 +89,7 @@ export async function updatePkg(
         if (!(key in obj!)) {
           obj![key] = {}
         }
-        obj = obj![key]
+        obj = obj![key] as PackageJson
       }
     }
     const targetJSON = sortPackageJson(pkg!)
@@ -120,7 +123,7 @@ export function configInPackageJSON(keys: string[]) {
 
 export interface GenerateOption {
   folderPath?: string
-  interpolationValues?: Record<string, any>
+  interpolationValues?: Record<string, string | number | boolean>
 }
 /**
  * 从模板文件生成配置文件

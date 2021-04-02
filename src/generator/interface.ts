@@ -15,5 +15,6 @@ export interface ConfigGenerator {
   checkExist(): Promise<boolean>
   // 生成配置文件
   generateConfig(selectedConfigKeys: AvailableConfigs[]): Promise<boolean>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
 }

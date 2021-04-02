@@ -17,6 +17,7 @@ module.exports = {
   rules: {
     // 'jsx-quotes': ['error', 'prefer-double'],
     '@typescript-eslint/no-non-null-assertion': 0,
+    '@typescript-eslint/explicit-module-boundary-types': 0,
   },
   // overrides: [
   //   {
