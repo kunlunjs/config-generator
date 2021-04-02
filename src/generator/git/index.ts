@@ -10,7 +10,7 @@ const GitGenerator: ConfigGenerator = {
   },
 
   async generateConfig(): Promise<boolean> {
-    return generateFromTemplateFile(join(__dirname, this.file!))
+    return generateFromTemplateFile(join(__dirname, '.gitignore.tpl'))
   },
 }
 

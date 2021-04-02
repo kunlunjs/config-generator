@@ -20,7 +20,7 @@ const LicenseGenerator: ConfigGenerator = {
   async generateConfig(): Promise<boolean> {
     const pkg = getPkgInfo()
     return (
-      (await generateFromTemplateFile(join(__dirname, 'LICENSE'), {
+      (await generateFromTemplateFile(join(__dirname, 'LICENSE.tpl'), {
         interpolationValues: {
           name: (pkg!.name as string) ?? '<product name>',
           author: (pkg!.author as string) ?? '<author>',

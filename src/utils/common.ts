@@ -15,17 +15,16 @@ interface PackageJson {
 
 let pkg: PackageJson | null = null
 
+interface ArgOption {
+  [key: string]: unknown
+}
 /**
  * 合并传入的配置和默认配置
  * @param defaultOpt 默认配置
  * @param opt 传入配置
  * @returns 综合后的配置
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function loadOption<ArgOption extends Record<string, any>>(
-  defaultOpt: ArgOption,
-  opt?: ArgOption,
-): ArgOption {
+export function loadOption<T extends ArgOption>(defaultOpt: T, opt?: T): T {
   return { ...defaultOpt, ...(opt || {}) }
 }
 
@@ -121,7 +120,7 @@ export function configInPackageJSON(keys: string[]) {
   return false
 }
 
-export interface GenerateOption {
+export interface GenerateOption extends ArgOption {
   folderPath?: string
   interpolationValues?: Record<string, string | number | boolean>
 }
@@ -166,7 +165,7 @@ export async function generateFromTemplateFile(
   }
 }
 
-export interface LogOption {
+export interface LogOption extends ArgOption {
   error?: boolean
   nameColor?: ColorEnum
 }

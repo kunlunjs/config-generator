@@ -1,6 +1,6 @@
 {
   "name": "fe-conf",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "description": "基础的前端项目配置生成器，适合项目初始化的时候使用，或者完善当前项目的配置。生成的配置文件只作为通用设置，具体项目仍然需要做进一步修改以适配项目需要。",
   "homepage": "https://github.com/turing-fe/config-generator#readme",
   "bugs": {
@@ -26,7 +26,7 @@
     "postpublish": "ts-node scripts/publish.ts after",
     "lint": "eslint ./ --ext js,ts,tsx,json --quiet --fix",
     "build": "tsc",
-    "start": "ts-node bin/main.ts"
+    "start": "ts-node src/main.ts"
   },
   "dependencies": {
     "ejs": "^3.1.6",

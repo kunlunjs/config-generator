@@ -2,6 +2,8 @@
 
 基础的前端项目配置生成器，适合项目初始化的时候使用，或者完善当前项目的配置。生成的配置文件只作为通用设置，具体项目仍然需要做进一步修改以适配项目需要。
 
+[![asciicast](https://asciinema.org/a/s754q27kLEDqs3uzgr78YYVRS.svg)](https://asciinema.org/a/s754q27kLEDqs3uzgr78YYVRS)
+
 ## 使用方法
 
 ```bash
