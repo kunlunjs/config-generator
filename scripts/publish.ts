@@ -1,4 +1,4 @@
-import { copyFileSync, readFileSync, writeFileSync } from 'fs'
+import { copyFileSync, readFileSync, unlinkSync, writeFileSync } from 'fs'
 import { join } from 'path'
 import { ensureFileSync } from 'fs-extra'
 import glob = require('fast-glob')
@@ -29,6 +29,7 @@ function run() {
       })
     } else if (arg === 'after') {
       copyFileSync(tempPath, pkgPath)
+      unlinkSync(tempPath)
     }
   } catch (error) {
     console.error(error)
