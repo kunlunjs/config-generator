@@ -21,7 +21,7 @@
     "postinstall": "husky install",
     "prepublishOnly": "npm run build && ts-node scripts/publish.ts before",
     "postpublish": "ts-node scripts/publish.ts after",
-    "lint": "eslint ./ --ext js,ts,tsx,json --quiet --fix",
+    "lint": "eslint ./ --ext js,jsx,ts,tsx,json --quiet --fix",
     "build": "tsc",
     "start": "ts-node src/main.ts"
   },

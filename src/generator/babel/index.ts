@@ -9,6 +9,7 @@ import { ConfigGenerator } from '../interface'
 
 const BabelGenerator: ConfigGenerator = {
   key: 'babel',
+  // FIXME: @babel/transform?
   dependencies: ['@babel/runtime'],
   devDependencies: ['@babel/core'],
   echoAfter:

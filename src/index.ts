@@ -18,8 +18,9 @@ export async function run() {
         choices: Object.keys(availableConfigs).map(_module => {
           return {
             title: _module,
+            description: availableConfigs[_module].desc,
             value: _module,
-            selected: availableConfigs[_module as keyof typeof availableConfigs]
+            selected: availableConfigs[_module].default
           }
         })
       }

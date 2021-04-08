@@ -62,6 +62,10 @@ export function getPkgInfo() {
         })
       ) as PackageJson
     } catch (error) {
+      log(
+        'package',
+        `读取 package.json 文件失败，请检查该文件是否存在且格式正确。`
+      )
       //
     }
   }

@@ -38,3 +38,9 @@ npx fe-conf
 - `stylelint`
 - `typescript`
 - `y2s`
+
+## TODO
+
+- [ ] 锁定大版本
+- [ ] 丰富说明文档，收集配置说明地址
+- [ ] babel preset env
