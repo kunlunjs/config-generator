@@ -3,7 +3,7 @@ import { AvailableConfigs } from '../../constants'
 import {
   generateFromTemplateFile,
   commonConfigExisted,
-  configInPackageJSON,
+  configInPackageJSON
 } from '../../utils'
 import { ConfigGenerator } from '../interface'
 
@@ -14,14 +14,14 @@ const EslintGenerator: ConfigGenerator = {
       'eslint',
       'eslint-plugin-import',
       'eslint-plugin-node',
-      'eslint-plugin-promise',
+      'eslint-plugin-promise'
     ]
     if (selectedConfigKeys.includes('prettier')) {
       deps.push(...['eslint-config-prettier', 'eslint-plugin-prettier'])
     }
     if (selectedConfigKeys.includes('typescript')) {
       deps.push(
-        ...['@typescript-eslint/eslint-plugin', '@typescript-eslint/parser'],
+        ...['@typescript-eslint/eslint-plugin', '@typescript-eslint/parser']
       )
     }
     return deps
@@ -37,18 +37,18 @@ const EslintGenerator: ConfigGenerator = {
   },
 
   async generateConfig(
-    selectedConfigKeys: AvailableConfigs[],
+    selectedConfigKeys: AvailableConfigs[]
   ): Promise<boolean> {
     return (
       (await generateFromTemplateFile(join(__dirname, '.eslintignore'))) &&
       (await generateFromTemplateFile(join(__dirname, '.eslintrc.js.tpl'), {
         interpolationValues: {
           prettier: selectedConfigKeys.includes('prettier'),
-          typescript: selectedConfigKeys.includes('typescript'),
-        },
+          typescript: selectedConfigKeys.includes('typescript')
+        }
       }))
     )
-  },
+  }
 }
 
 export default EslintGenerator

@@ -12,7 +12,7 @@ const HuskyGenerator: ConfigGenerator = {
 
   async generateConfig(): Promise<boolean> {
     return updatePkg(this.key, ['scripts', 'postinstall'], 'husky install')
-  },
+  }
 }
 
 export default HuskyGenerator

@@ -11,7 +11,7 @@ const EditorconfigGenerator: ConfigGenerator = {
 
   async generateConfig(): Promise<boolean> {
     return generateFromTemplateFile(join(__dirname, this.file!))
-  },
+  }
 }
 
 export default EditorconfigGenerator

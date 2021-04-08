@@ -71,14 +71,14 @@ export default async function run(selectedConfigKeys: AvailableConfigs[]) {
         dependencies.push(
           ...(generator.dependencies instanceof Function
             ? generator.dependencies(selectedConfigKeys)
-            : generator.dependencies),
+            : generator.dependencies)
         )
       }
       if (generator.devDependencies) {
         devDependencies.push(
           ...(generator.devDependencies instanceof Function
             ? generator.devDependencies(selectedConfigKeys)
-            : generator.devDependencies),
+            : generator.devDependencies)
         )
       }
     } else {
@@ -94,7 +94,7 @@ export default async function run(selectedConfigKeys: AvailableConfigs[]) {
     }
     if (devDependencies.length) {
       commands.push(
-        `${packageManager || 'npm'} i -D ${devDependencies.join(' ')}`,
+        `${packageManager || 'npm'} i -D ${devDependencies.join(' ')}`
       )
     }
     const _commands = commands.join('\n')
@@ -103,8 +103,8 @@ export default async function run(selectedConfigKeys: AvailableConfigs[]) {
         `install`,
         `建议使用 pnpm 或 yarn 进行包管理，不建议使用 npm 进行包管理，如需安装请执行 npm i -g pnpm/yarn，并在安装后执行\n${_commands.replace(
           /^npm/g,
-          'pnpm/yarn',
-        )}。如果一定要使用 npm 安装依赖，请执行:\n${_commands}`,
+          'pnpm/yarn'
+        )}。如果一定要使用 npm 安装依赖，请执行:\n${_commands}`
       )
     } else {
       try {
@@ -129,6 +129,6 @@ export default async function run(selectedConfigKeys: AvailableConfigs[]) {
     generated > 0
       ? `Generated ${generated} module file${generated > 1 ? 's' : ''}.`
       : 'Nothing to generate.',
-    { nameColor: 'FgGreen' },
+    { nameColor: 'FgGreen' }
   )
 }

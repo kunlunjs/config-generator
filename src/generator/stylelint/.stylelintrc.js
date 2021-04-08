@@ -5,8 +5,8 @@ module.exports = {
       true,
       {
         // 需要忽略的特定的选择器
-        ignoreTypes: ['page'],
-      },
-    ],
-  },
+        ignoreTypes: ['page']
+      }
+    ]
+  }
 }

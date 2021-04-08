@@ -4,7 +4,7 @@ import {
   generateFromTemplateFile,
   configInPackageJSON,
   getPkgInfo,
-  updatePkg,
+  updatePkg
 } from '../../utils'
 import { ConfigGenerator } from '../interface'
 
@@ -24,11 +24,11 @@ const LicenseGenerator: ConfigGenerator = {
         interpolationValues: {
           name: (pkg!.name as string) ?? '<product name>',
           author: (pkg!.author as string) ?? '<author>',
-          year: new Date().getFullYear(),
-        },
+          year: new Date().getFullYear()
+        }
       })) && (await updatePkg(this.key, ['license'], 'GPL-3.0-or-later'))
     )
-  },
+  }
 }
 
 export default LicenseGenerator

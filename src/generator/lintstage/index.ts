@@ -2,7 +2,7 @@ import { join } from 'path'
 import {
   generateFromTemplateFile,
   commonConfigExisted,
-  configInPackageJSON,
+  configInPackageJSON
 } from '../../utils'
 import { ConfigGenerator } from '../interface'
 
@@ -21,10 +21,10 @@ const LintStagedGenerator: ConfigGenerator = {
     return (
       (await generateFromTemplateFile(join(__dirname, '.lintstagedrc.js'))) &&
       (await generateFromTemplateFile(join(__dirname, 'pre-commit'), {
-        folderPath: '.husky',
+        folderPath: '.husky'
       }))
     )
-  },
+  }
 }
 
 export default LintStagedGenerator

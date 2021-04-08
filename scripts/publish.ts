@@ -16,7 +16,7 @@ function run() {
       delete pkgContent.scripts
       // 保留postpublish
       pkgContent.scripts = {
-        postpublish: 'ts-node scripts/publish.ts after',
+        postpublish: 'ts-node scripts/publish.ts after'
       }
       delete pkgContent.devDependencies
       delete pkgContent.publishConfig

@@ -6,7 +6,7 @@ import { log, sleep } from './utils'
 export async function run() {
   log(
     'info',
-    '本工具仅用于生成项目的初始化配置使用，具体每个项目的一些配置仍然需要单独设置，建议在新增 package.json 后执行。',
+    '本工具仅用于生成项目的初始化配置使用，具体每个项目的一些配置仍然需要单独设置，建议在新增 package.json 后执行。'
   )
   await sleep(1000)
   try {
@@ -19,11 +19,10 @@ export async function run() {
           return {
             title: _module,
             value: _module,
-            selected:
-              availableConfigs[_module as keyof typeof availableConfigs],
+            selected: availableConfigs[_module as keyof typeof availableConfigs]
           }
-        }),
-      },
+        })
+      }
     ])
     if (selected.length) {
       runGenerator(selected)

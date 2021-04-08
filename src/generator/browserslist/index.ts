@@ -2,7 +2,7 @@ import { join } from 'path'
 import {
   configInPackageJSON,
   generateFromTemplateFile,
-  globExisted,
+  globExisted
 } from '../../utils'
 import { ConfigGenerator } from '../interface'
 
@@ -17,7 +17,7 @@ const BrowserslistGenerator: ConfigGenerator = {
 
   async generateConfig(): Promise<boolean> {
     return generateFromTemplateFile(join(__dirname, this.file!))
-  },
+  }
 }
 
 export default BrowserslistGenerator

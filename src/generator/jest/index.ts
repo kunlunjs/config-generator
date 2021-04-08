@@ -12,7 +12,7 @@ const JestGenerator: ConfigGenerator = {
 
   async generateConfig(): Promise<boolean> {
     return generateFromTemplateFile(join(__dirname, 'jest.config.ts.tpl'))
-  },
+  }
 }
 
 export default JestGenerator

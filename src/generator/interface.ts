@@ -1,7 +1,7 @@
 import { AvailableConfigs } from '../constants'
 
 export type DependenciesFromFunction = (
-  selectedConfigKeys: AvailableConfigs[],
+  selectedConfigKeys: AvailableConfigs[]
 ) => string[]
 
 export interface ConfigGenerator {

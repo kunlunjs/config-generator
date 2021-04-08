@@ -2,7 +2,7 @@ import { join } from 'path'
 import {
   commonConfigExisted,
   configInPackageJSON,
-  generateFromTemplateFile,
+  generateFromTemplateFile
 } from '../../utils'
 import { ConfigGenerator } from '../interface'
 
@@ -21,10 +21,10 @@ const CommitlintGenerator: ConfigGenerator = {
     return (
       (await generateFromTemplateFile(join(__dirname, '.commitlintrc.js'))) &&
       (await generateFromTemplateFile(join(__dirname, 'commit-msg'), {
-        folderPath: '.husky',
+        folderPath: '.husky'
       }))
     )
-  },
+  }
 }
 
 export default CommitlintGenerator

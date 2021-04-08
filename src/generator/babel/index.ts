@@ -3,7 +3,7 @@ import {
   commonConfigExisted,
   configInPackageJSON,
   generateFromTemplateFile,
-  globExisted,
+  globExisted
 } from '../../utils'
 import { ConfigGenerator } from '../interface'
 
@@ -24,7 +24,7 @@ const BabelGenerator: ConfigGenerator = {
 
   async generateConfig(): Promise<boolean> {
     return generateFromTemplateFile(join(__dirname, '.babelrc.js'))
-  },
+  }
 }
 
 export default BabelGenerator

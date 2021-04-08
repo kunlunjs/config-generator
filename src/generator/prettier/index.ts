@@ -3,7 +3,7 @@ import {
   commonConfigExisted,
   configInPackageJSON,
   generateFromTemplateFile,
-  globExisted,
+  globExisted
 } from '../../utils'
 import { ConfigGenerator } from '../interface'
 
@@ -24,7 +24,7 @@ const PrettierGenerator: ConfigGenerator = {
       (await generateFromTemplateFile(join(__dirname, '.prettierrc.js'))) &&
       (await generateFromTemplateFile(join(__dirname, '.prettierignore')))
     )
-  },
+  }
 }
 
 export default PrettierGenerator

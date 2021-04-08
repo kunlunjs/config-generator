@@ -18,7 +18,7 @@ export const availableConfigs = {
   readme: true,
   stylelint: false,
   typescript: true,
-  y2s: false,
+  y2s: false
 }
 
 export type AvailableConfigs = keyof typeof availableConfigs

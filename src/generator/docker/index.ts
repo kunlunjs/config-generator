@@ -11,7 +11,7 @@ const DockerGenerator: ConfigGenerator = {
 
   async generateConfig(): Promise<boolean> {
     return generateFromTemplateFile(join(__dirname, '.dockerignore.tpl'))
-  },
+  }
 }
 
 export default DockerGenerator

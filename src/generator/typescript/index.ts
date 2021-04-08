@@ -12,7 +12,7 @@ const TypescriptGenerator: ConfigGenerator = {
 
   async generateConfig(): Promise<boolean> {
     return generateFromTemplateFile(join(__dirname, 'tsconfig.json.tpl'))
-  },
+  }
 }
 
 export default TypescriptGenerator

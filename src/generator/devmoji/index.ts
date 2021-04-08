@@ -12,9 +12,9 @@ const DevmojiGenerator: ConfigGenerator = {
 
   async generateConfig(): Promise<boolean> {
     return generateFromTemplateFile(join(__dirname, 'prepare-commit-msg'), {
-      folderPath: '.husky',
+      folderPath: '.husky'
     })
-  },
+  }
 }
 
 export default DevmojiGenerator

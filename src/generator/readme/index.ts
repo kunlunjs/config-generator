@@ -14,10 +14,10 @@ const ReadmeGenerator: ConfigGenerator = {
     const pkg = getPkgInfo()
     return generateFromTemplateFile(join(__dirname, 'README.md'), {
       interpolationValues: {
-        name: (pkg!.name as string) ?? '<product name>',
-      },
+        name: (pkg!.name as string) ?? '<product name>'
+      }
     })
-  },
+  }
 }
 
 export default ReadmeGenerator

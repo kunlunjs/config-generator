@@ -46,7 +46,7 @@ export async function globExisted(globString: string) {
  */
 export async function commonConfigExisted(name: string) {
   return globExisted(
-    `?(.)${name}?(rc)?(.config)?({.js,.ts,.cjs,.json,.y?(a)ml})`,
+    `?(.)${name}?(rc)?(.config)?({.js,.ts,.cjs,.json,.y?(a)ml})`
   )
 }
 
@@ -58,8 +58,8 @@ export function getPkgInfo() {
     try {
       pkg = JSON.parse(
         readFileSync(join(process.cwd(), 'package.json'), {
-          encoding: 'utf-8',
-        }),
+          encoding: 'utf-8'
+        })
       ) as PackageJson
     } catch (error) {
       //
@@ -77,7 +77,7 @@ export function getPkgInfo() {
 export async function updatePkg(
   _module: string,
   keys: string[],
-  value: unknown,
+  value: unknown
 ) {
   let obj = getPkgInfo()
   if (obj) {
@@ -94,15 +94,15 @@ export async function updatePkg(
     const targetJSON = sortPackageJson(pkg!)
     await promisify(writeFile)(
       join(process.cwd(), 'package.json'),
-      JSON.stringify(targetJSON, null, 2),
+      JSON.stringify(targetJSON, null, 2)
     )
     return true
   } else {
     log(
       _module,
       `更新 package.json 内容失败，你可以手动修改"${keys.join(
-        '.',
-      )}"的值为"${value}"。`,
+        '.'
+      )}"的值为"${value}"。`
     )
   }
   return false
@@ -131,11 +131,11 @@ export interface GenerateOption extends ArgOption {
  */
 export async function generateFromTemplateFile(
   templateFilePath: string,
-  opt?: GenerateOption,
+  opt?: GenerateOption
 ): Promise<boolean> {
   const { folderPath, interpolationValues } = loadOption<GenerateOption>(
     {},
-    opt,
+    opt
   )
   try {
     if (folderPath) {
@@ -144,7 +144,7 @@ export async function generateFromTemplateFile(
     const targetFilePath = join(
       process.cwd(),
       folderPath ?? '',
-      parse(templateFilePath).base,
+      parse(templateFilePath).base
     ).replace(/\.tpl$/, '')
     if (!interpolationValues) {
       await promisify(copyFile)(templateFilePath, targetFilePath)
@@ -152,7 +152,7 @@ export async function generateFromTemplateFile(
       try {
         const rendered = await renderFile(templateFilePath, interpolationValues)
         await promisify(writeFile)(targetFilePath, rendered, {
-          encoding: 'utf-8',
+          encoding: 'utf-8'
         })
       } catch (error) {
         log('render', error.toString?.() ?? error, { error: true })
@@ -178,13 +178,13 @@ export interface LogOption extends ArgOption {
 export function log(name: string, content: string, opt?: LogOption) {
   const option: LogOption = loadOption<LogOption>(
     { error: false, nameColor: 'FgCyan' },
-    opt,
+    opt
   )
   console.log(
     `${colorful(
       `[${name[0].toUpperCase()}${name.slice(1)}]:`,
-      option.error ? 'FgRed' : option.nameColor!,
-    )} ${content}`,
+      option.error ? 'FgRed' : option.nameColor!
+    )} ${content}`
   )
 }
 

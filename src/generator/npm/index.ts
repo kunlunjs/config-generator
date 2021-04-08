@@ -11,7 +11,7 @@ const NpmGenerator: ConfigGenerator = {
 
   async generateConfig(): Promise<boolean> {
     return generateFromTemplateFile(join(__dirname, '.npmrc.tpl'))
-  },
+  }
 }
 
 export default NpmGenerator

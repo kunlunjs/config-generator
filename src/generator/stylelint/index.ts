@@ -3,7 +3,7 @@ import {
   generateFromTemplateFile,
   commonConfigExisted,
   configInPackageJSON,
-  updatePkg,
+  updatePkg
 } from '../../utils'
 import { ConfigGenerator } from '../interface'
 
@@ -25,10 +25,10 @@ const StylelintGenerator: ConfigGenerator = {
       (await updatePkg(
         this.key,
         ['scripts', 'stylint'],
-        'stylelint "src/**/*.{css,less,scss,sass,styl}" --fix',
+        'stylelint "src/**/*.{css,less,scss,sass,styl}" --fix'
       ))
     )
-  },
+  }
 }
 
 export default StylelintGenerator
