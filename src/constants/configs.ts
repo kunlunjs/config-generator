@@ -1,11 +1,4 @@
-export type AvailableConfigs = {
-  [key: string]: {
-    default: boolean
-    desc: string
-  }
-}
-
-export const availableConfigs: AvailableConfigs = {
+export const availableConfigs = {
   babel: {
     // 默认是否勾选
     default: false,
@@ -88,3 +81,7 @@ export const availableConfigs: AvailableConfigs = {
     desc: 'Yapi to service code generator'
   }
 }
+
+export type AvailableConfigs = typeof availableConfigs
+
+export type AvailableConfigKeys = keyof AvailableConfigs

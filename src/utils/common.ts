@@ -10,7 +10,7 @@ import glob = require('fast-glob')
 import { ColorEnum, colorful } from './color'
 
 interface PackageJson {
-  [key: string]: unknown
+  [key: string]: any
 }
 
 let pkg: PackageJson | null = null

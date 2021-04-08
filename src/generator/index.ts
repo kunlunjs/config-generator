@@ -21,6 +21,7 @@ import StylelintGenerator from './stylelint'
 import TypescriptGenerator from './typescript'
 import Y2sGenerator from './y2s'
 import { getPackageManager } from '../utils/package-manager'
+import { AvailableConfigKeys } from '../constants'
 
 const generatorMap: Record<string, ConfigGenerator> = {}
 
@@ -44,7 +45,7 @@ generatorMap[StylelintGenerator.key] = StylelintGenerator
 generatorMap[TypescriptGenerator.key] = TypescriptGenerator
 generatorMap[Y2sGenerator.key] = Y2sGenerator
 
-export default async function run(selectedConfigKeys: string[]) {
+export default async function run(selectedConfigKeys: AvailableConfigKeys[]) {
   let generated = 0
   const dependencies: string[] = []
   const devDependencies: string[] = []

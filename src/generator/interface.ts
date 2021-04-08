@@ -1,5 +1,7 @@
+import { AvailableConfigKeys } from '../constants'
+
 export type DependenciesFromFunction = (
-  selectedConfigKeys: string[]
+  selectedConfigKeys: AvailableConfigKeys[]
 ) => string[]
 
 export interface ConfigGenerator {
@@ -12,7 +14,7 @@ export interface ConfigGenerator {
   // 检测当前配置项是否已存在
   checkExist(): Promise<boolean>
   // 生成配置文件
-  generateConfig(selectedConfigKeys: string[]): Promise<boolean>
+  generateConfig(selectedConfigKeys: AvailableConfigKeys[]): Promise<boolean>
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
 }
