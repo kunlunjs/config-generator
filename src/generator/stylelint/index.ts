@@ -10,7 +10,16 @@ import { ConfigGenerator } from '../interface'
 const StylelintGenerator: ConfigGenerator = {
   key: 'stylelint',
   file: '.stylelintrc.js',
-  devDependencies: ['stylelint', 'stylelint-config-standard'],
+  devDependencies: [
+    'stylelint',
+    'stylelint-config-standard',
+    'stylelint-config-css-modules',
+    'stylelint-config-rational-order',
+    'stylelint-config-prettier',
+    'stylelint-no-unsupported-browser-features',
+    'stylelint-order',
+    'stylelint-declaration-block-no-ignored-properties'
+  ],
 
   async checkExist(): Promise<boolean> {
     return (
