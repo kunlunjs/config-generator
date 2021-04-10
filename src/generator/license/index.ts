@@ -22,8 +22,8 @@ const LicenseGenerator: ConfigGenerator = {
     return (
       (await generateFromTemplateFile(join(__dirname, 'LICENSE.tpl'), {
         interpolationValues: {
-          name: (pkg!.name as string) ?? '<product name>',
-          author: (pkg!.author as string) ?? '<author>',
+          name: (pkg?.name as string) ?? '<product name>',
+          author: (pkg?.author as string) ?? '<author>',
           year: new Date().getFullYear()
         }
       })) && (await updatePkg(this.key, ['license'], 'GPL-3.0-or-later'))

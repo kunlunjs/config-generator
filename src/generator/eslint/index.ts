@@ -1,5 +1,5 @@
 import { join } from 'path'
-import { AvailableConfigs } from '../../constants'
+import { AvailableConfigKeys } from '../../constants'
 import {
   generateFromTemplateFile,
   commonConfigExisted,
@@ -9,7 +9,7 @@ import { ConfigGenerator } from '../interface'
 
 const EslintGenerator: ConfigGenerator = {
   key: 'eslint',
-  devDependencies: (selectedConfigKeys: AvailableConfigs[]) => {
+  devDependencies: (selectedConfigKeys: AvailableConfigKeys[]) => {
     const deps = [
       'eslint',
       'eslint-plugin-import',
@@ -37,7 +37,7 @@ const EslintGenerator: ConfigGenerator = {
   },
 
   async generateConfig(
-    selectedConfigKeys: AvailableConfigs[]
+    selectedConfigKeys: AvailableConfigKeys[]
   ): Promise<boolean> {
     return (
       (await generateFromTemplateFile(join(__dirname, '.eslintignore'))) &&

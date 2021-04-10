@@ -10,7 +10,7 @@ import glob = require('fast-glob')
 import { ColorEnum, colorful } from './color'
 
 interface PackageJson {
-  [key: string]: unknown
+  [key: string]: any
 }
 
 let pkg: PackageJson | null = null
@@ -62,6 +62,10 @@ export function getPkgInfo() {
         })
       ) as PackageJson
     } catch (error) {
+      log(
+        'package',
+        `读取 package.json 文件失败，请检查该文件是否存在且格式正确。`
+      )
       //
     }
   }

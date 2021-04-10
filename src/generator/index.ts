@@ -1,6 +1,5 @@
 import { ConfigGenerator } from './interface'
 import { colorful, log, runCommand } from '../utils'
-import { AvailableConfigs } from '../constants'
 
 import BabelGenerator from './babel'
 import BrowserslistGenerator from './browserslist'
@@ -22,6 +21,7 @@ import StylelintGenerator from './stylelint'
 import TypescriptGenerator from './typescript'
 import Y2sGenerator from './y2s'
 import { getPackageManager } from '../utils/package-manager'
+import { AvailableConfigKeys } from '../constants'
 
 const generatorMap: Record<string, ConfigGenerator> = {}
 
@@ -45,7 +45,7 @@ generatorMap[StylelintGenerator.key] = StylelintGenerator
 generatorMap[TypescriptGenerator.key] = TypescriptGenerator
 generatorMap[Y2sGenerator.key] = Y2sGenerator
 
-export default async function run(selectedConfigKeys: AvailableConfigs[]) {
+export default async function run(selectedConfigKeys: AvailableConfigKeys[]) {
   let generated = 0
   const dependencies: string[] = []
   const devDependencies: string[] = []
@@ -94,7 +94,9 @@ export default async function run(selectedConfigKeys: AvailableConfigs[]) {
     }
     if (devDependencies.length) {
       commands.push(
-        `${packageManager || 'npm'} i -D ${devDependencies.join(' ')}`
+        `${packageManager || 'npm'} ${
+          packageManager === 'yarn' ? 'add' : 'i'
+        } -D ${devDependencies.join(' ')}`
       )
     }
     const _commands = commands.join('\n')

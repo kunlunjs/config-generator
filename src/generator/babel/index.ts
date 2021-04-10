@@ -1,4 +1,5 @@
 import { join } from 'path'
+import { AvailableConfigKeys } from '../../constants'
 import {
   commonConfigExisted,
   configInPackageJSON,
@@ -9,11 +10,22 @@ import { ConfigGenerator } from '../interface'
 
 const BabelGenerator: ConfigGenerator = {
   key: 'babel',
-  dependencies: ['@babel/runtime'],
-  devDependencies: ['@babel/core'],
-  echoAfter:
-    '你仍需要为 babel 设置 preset 等设置，参考 https://babeljs.io/docs/en/presets/',
-
+  dependencies: [
+    // 提供模块化函数库
+    '@babel/runtime',
+    'core-js@3'
+  ],
+  devDependencies: (selectedKeys: AvailableConfigKeys[]) => {
+    const ret = [
+      '@babel/preset-env',
+      // 相同的函数抽离出来，同时避免全局变量污染
+      '@babel/plugin-transform-runtime'
+    ]
+    if (selectedKeys.includes('typescript')) {
+      ret.push('@babel/preset-typescript')
+    }
+    return ret
+  },
   async checkExist(): Promise<boolean> {
     return (
       (await commonConfigExisted(BabelGenerator.key)) ||
