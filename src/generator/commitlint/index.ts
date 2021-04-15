@@ -8,6 +8,14 @@ import { ConfigGenerator } from '../interface'
 
 const CommitlintGenerator: ConfigGenerator = {
   key: 'commitlint',
+  select: {
+    default: true,
+    front: true,
+    full: true,
+    node: true
+  },
+  desc: 'Lint commit messages',
+  refUrl: 'https://github.com/conventional-changelog/commitlint',
   devDependencies: ['@commitlint/cli', '@commitlint/config-conventional'],
 
   async checkExist(): Promise<boolean> {

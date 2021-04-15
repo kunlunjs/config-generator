@@ -3,6 +3,14 @@ import { ConfigGenerator } from '../interface'
 
 const HuskyGenerator: ConfigGenerator = {
   key: 'husky',
+  select: {
+    default: true,
+    front: true,
+    full: true,
+    node: true
+  },
+  desc: 'Modern native Git hooks made easy',
+  refUrl: 'https://typicode.github.io/husky/',
   devDependencies: ['husky'],
   execAfter: 'npx husky install',
 

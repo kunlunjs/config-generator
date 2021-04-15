@@ -1,49 +1,7 @@
-import { ConfigGenerator } from './interface'
 import { colorful, log, runCommand } from '../utils'
 
-import BabelGenerator from './babel'
-import BrowserslistGenerator from './browserslist'
-import CommitlintGenerator from './commitlint'
-import DevmojiGenerator from './devmoji'
-import DockerGenerator from './docker'
-import EditorconfigGenerator from './editorconfig'
-import EslintGenerator from './eslint'
-import GitGenerator from './git'
-import HuskyGenerator from './husky'
-import JestGenerator from './jest'
-import LicenseGenerator from './license'
-import LintStagedGenerator from './lintstage'
-import NpmGenerator from './npm'
-import NvmGenerator from './nvm'
-import PrettierGenerator from './prettier'
-import ReadmeGenerator from './readme'
-import StylelintGenerator from './stylelint'
-import TypescriptGenerator from './typescript'
-import Y2sGenerator from './y2s'
-import { getPackageManager } from '../utils/package-manager'
-import { AvailableConfigKeys } from '../constants'
-
-const generatorMap: Record<string, ConfigGenerator> = {}
-
-generatorMap[BabelGenerator.key] = BabelGenerator
-generatorMap[BrowserslistGenerator.key] = BrowserslistGenerator
-generatorMap[CommitlintGenerator.key] = CommitlintGenerator
-generatorMap[DevmojiGenerator.key] = DevmojiGenerator
-generatorMap[DockerGenerator.key] = DockerGenerator
-generatorMap[EditorconfigGenerator.key] = EditorconfigGenerator
-generatorMap[EslintGenerator.key] = EslintGenerator
-generatorMap[GitGenerator.key] = GitGenerator
-generatorMap[HuskyGenerator.key] = HuskyGenerator
-generatorMap[JestGenerator.key] = JestGenerator
-generatorMap[LicenseGenerator.key] = LicenseGenerator
-generatorMap[LintStagedGenerator.key] = LintStagedGenerator
-generatorMap[NpmGenerator.key] = NpmGenerator
-generatorMap[NvmGenerator.key] = NvmGenerator
-generatorMap[PrettierGenerator.key] = PrettierGenerator
-generatorMap[ReadmeGenerator.key] = ReadmeGenerator
-generatorMap[StylelintGenerator.key] = StylelintGenerator
-generatorMap[TypescriptGenerator.key] = TypescriptGenerator
-generatorMap[Y2sGenerator.key] = Y2sGenerator
+import { getPackageManager } from '../utils'
+import { availableConfigs, AvailableConfigKeys } from './generators'
 
 export default async function run(selectedConfigKeys: AvailableConfigKeys[]) {
   let generated = 0
@@ -51,8 +9,9 @@ export default async function run(selectedConfigKeys: AvailableConfigKeys[]) {
   const devDependencies: string[] = []
   const echoList: [string, string][] = []
   const execList: [string, string][] = []
+  const refUrls: { label: string; url: string }[] = []
   for (const key of selectedConfigKeys) {
-    const generator = generatorMap[key]
+    const generator = availableConfigs[key]
     if (!(await generator.checkExist())) {
       generated++
       log(key, 'Generating...')
@@ -84,7 +43,28 @@ export default async function run(selectedConfigKeys: AvailableConfigKeys[]) {
     } else {
       log(key, 'Existed.')
     }
+    if (generator.refUrl) {
+      if (typeof generator.refUrl === 'string') {
+        refUrls.push({
+          label: generator.key,
+          url: generator.refUrl
+        })
+      } else {
+        refUrls.push(
+          ...generator.refUrl.map(ref => {
+            return {
+              label: `${generator.key}: ${ref.label}`,
+              url: ref.url
+            }
+          })
+        )
+      }
+    }
   }
+  // 打印配置参考url表格
+  console.log('\n')
+  log('references', '如果需要修改默认生成的配置，请参考下面表格中的地址')
+  console.table(refUrls)
   // 安装依赖
   if (dependencies.length || devDependencies.length) {
     const packageManager = await getPackageManager()

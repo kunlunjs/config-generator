@@ -1,15 +1,22 @@
 import { join } from 'path'
-import { AvailableConfigKeys } from '../../constants'
 import {
   commonConfigExisted,
   configInPackageJSON,
   generateFromTemplateFile,
   globExisted
 } from '../../utils'
+import { AvailableConfigKeys } from '../generators'
 import { ConfigGenerator } from '../interface'
 
 const BabelGenerator: ConfigGenerator = {
   key: 'babel',
+  select: {
+    front: true,
+    full: true,
+    node: true
+  },
+  desc: 'Use next generation JavaScript, today',
+  refUrl: 'https://babeljs.io/docs/en/configuration',
   dependencies: [
     // 提供模块化函数库
     '@babel/runtime',

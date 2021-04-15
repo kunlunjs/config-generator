@@ -4,6 +4,13 @@ import { ConfigGenerator } from '../interface'
 
 const ReadmeGenerator: ConfigGenerator = {
   key: 'readme',
+  select: {
+    default: true,
+    front: true,
+    full: true,
+    node: true
+  },
+  desc: 'Tell others about your project',
   echoAfter: '你可能需要更改 README 文件中的内容。',
 
   checkExist(): Promise<boolean> {

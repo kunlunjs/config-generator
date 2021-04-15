@@ -9,6 +9,13 @@ import { ConfigGenerator } from '../interface'
 
 const StylelintGenerator: ConfigGenerator = {
   key: 'stylelint',
+  select: {
+    front: true,
+    full: true
+  },
+  desc:
+    'A mighty, modern linter that helps you avoid errors and enforce conventions in your styles',
+  refUrl: 'https://stylelint.io/user-guide/configure',
   file: '.stylelintrc.js',
   devDependencies: ['stylelint', 'stylelint-config-standard'],
 
@@ -30,5 +37,4 @@ const StylelintGenerator: ConfigGenerator = {
     )
   }
 }
-
 export default StylelintGenerator

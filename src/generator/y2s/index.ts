@@ -4,6 +4,8 @@ import { ConfigGenerator } from '../interface'
 
 const Y2sGenerator: ConfigGenerator = {
   key: 'y2s',
+  desc: 'Yapi to service code generator',
+  refUrl: 'https://www.npmjs.com/package/y2s',
   file: '.y2src.js',
   devDependencies: ['y2s'],
 

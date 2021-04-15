@@ -4,6 +4,8 @@ import { ConfigGenerator } from '../interface'
 
 const NpmGenerator: ConfigGenerator = {
   key: 'npm',
+  desc: "Npm's configuration",
+  refUrl: 'https://docs.npmjs.com/cli/v7/configuring-npm/npmrc/',
   file: '.npmrc',
   checkExist(): Promise<boolean> {
     return globExisted(this.file!)

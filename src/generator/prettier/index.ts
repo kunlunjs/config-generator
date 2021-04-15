@@ -9,6 +9,14 @@ import { ConfigGenerator } from '../interface'
 
 const PrettierGenerator: ConfigGenerator = {
   key: 'prettier',
+  select: {
+    default: true,
+    front: true,
+    full: true,
+    node: true
+  },
+  desc: 'An opinionated code formatter',
+  refUrl: 'https://prettier.io/docs/en/configuration.html',
   devDependencies: ['prettier'],
   async checkExist(): Promise<boolean> {
     return (

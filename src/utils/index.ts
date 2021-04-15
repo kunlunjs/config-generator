@@ -1,3 +1,6 @@
 export * from './common'
 export * from './color'
 export * from './command'
+export * from './package-manager'
+export * from './spinner'
+export * from './version'

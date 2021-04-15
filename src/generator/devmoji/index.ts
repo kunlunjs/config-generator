@@ -4,6 +4,13 @@ import { ConfigGenerator } from '../interface'
 
 const DevmojiGenerator: ConfigGenerator = {
   key: 'devmoji',
+  select: {
+    default: true,
+    front: true,
+    full: true,
+    node: true
+  },
+  desc: '🤖 🚀 ✨ Emojify your conventional commits with Devmoji',
   devDependencies: ['devmoji'],
 
   checkExist(): Promise<boolean> {

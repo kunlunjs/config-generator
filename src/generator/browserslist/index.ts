@@ -8,8 +8,14 @@ import { ConfigGenerator } from '../interface'
 
 const BrowserslistGenerator: ConfigGenerator = {
   key: 'browserslist',
+  select: {
+    front: true,
+    full: true
+  },
+  desc:
+    'The config to share target browsers and Node.js versions between different front-end tools',
+  refUrl: 'https://github.com/browserslist/browserslist',
   file: '.browserslistrc',
-  echoAfter: `如果需要修改修改 browserslist 的配置，请参考 https://github.com/browserslist/browserslist`,
   async checkExist(): Promise<boolean> {
     return (
       (await globExisted(this.file!)) || configInPackageJSON(['browserslist'])

@@ -1,6 +1,6 @@
 {
   "name": "fe-conf",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "基础的前端项目配置生成器，适合项目初始化的时候使用，或者完善当前项目的配置。生成的配置文件只作为通用设置，具体项目仍然需要做进一步修改以适配项目需要。",
   "homepage": "https://github.com/turing-fe/config-generator#readme",
   "bugs": {
@@ -13,10 +13,10 @@
   "license": "MIT",
   "author": "erguotou525@gmail.com",
   "main": "dist/index.js",
-  "files": ["bin", "dist"],
   "bin": {
     "fe-conf": "./bin/main.js"
   },
+  "files": ["bin", "dist"],
   "scripts": {
     "postinstall": "husky install",
     "prepublishOnly": "npm run build && ts-node scripts/publish.ts before",

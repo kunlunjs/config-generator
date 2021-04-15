@@ -4,6 +4,8 @@ import { ConfigGenerator } from '../interface'
 
 const NvmGenerator: ConfigGenerator = {
   key: 'nvm',
+  desc: 'A version manager for node.js',
+  refUrl: 'https://github.com/nvm-sh/nvm#nvmrc',
   file: '.nvmrc',
   checkExist(): Promise<boolean> {
     return globExisted(this.file!)

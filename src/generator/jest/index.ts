@@ -4,8 +4,9 @@ import { ConfigGenerator } from '../interface'
 
 const JestGenerator: ConfigGenerator = {
   key: 'jest',
+  desc: 'A delightful JavaScript Testing Framework with a focus on simplicity',
+  refUrl: 'https://jestjs.io/docs/configuration',
   devDependencies: ['jest'],
-  echoAfter: '你可以参考 https://jestjs.io/docs/configuration 补充 jest 配置。',
   checkExist(): Promise<boolean> {
     return commonConfigExisted('jest')
   },

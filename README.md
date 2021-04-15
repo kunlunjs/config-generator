@@ -38,9 +38,3 @@ npx fe-conf
 - `stylelint`
 - `typescript`
 - `y2s`
-
-## TODO
-
-- [ ] 丰富命令行参数
-- [ ] 锁定大版本
-- [ ] 丰富说明文档，收集配置说明地址

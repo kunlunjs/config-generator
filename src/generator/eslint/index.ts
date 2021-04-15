@@ -1,14 +1,31 @@
 import { join } from 'path'
-import { AvailableConfigKeys } from '../../constants'
 import {
   generateFromTemplateFile,
   commonConfigExisted,
   configInPackageJSON
 } from '../../utils'
+import { AvailableConfigKeys } from '../generators'
 import { ConfigGenerator } from '../interface'
 
 const EslintGenerator: ConfigGenerator = {
   key: 'eslint',
+  select: {
+    default: true,
+    front: true,
+    full: true,
+    node: true
+  },
+  desc: 'Find and fix problems in your JavaScript code',
+  refUrl: [
+    {
+      label: 'Reference',
+      url: 'https://eslint.org/docs/user-guide/configuring/'
+    },
+    {
+      label: 'Best practices',
+      url: 'https://github.com/umijs/fabric'
+    }
+  ],
   devDependencies: (selectedConfigKeys: AvailableConfigKeys[]) => {
     const deps = [
       'eslint',
