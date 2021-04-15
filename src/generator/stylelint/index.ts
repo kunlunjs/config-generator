@@ -17,7 +17,16 @@ const StylelintGenerator: ConfigGenerator = {
     'A mighty, modern linter that helps you avoid errors and enforce conventions in your styles',
   refUrl: 'https://stylelint.io/user-guide/configure',
   file: '.stylelintrc.js',
-  devDependencies: ['stylelint', 'stylelint-config-standard'],
+  devDependencies: [
+    'stylelint',
+    'stylelint-config-standard',
+    'stylelint-config-css-modules',
+    'stylelint-config-rational-order',
+    'stylelint-config-prettier',
+    'stylelint-no-unsupported-browser-features',
+    'stylelint-order',
+    'stylelint-declaration-block-no-ignored-properties'
+  ],
 
   async checkExist(): Promise<boolean> {
     return (
