@@ -2,17 +2,21 @@ import { execSync } from 'child_process'
 import prompts = require('prompts')
 import { log } from './utils'
 import { TemplateKyes } from './generator/interface'
-import selfPkgInfo from '../package.json'
 import { showSpinner, isVersionUpdated } from './utils'
 
 export async function upgradeValid(skipPrompts = false) {
   const stopSpinner = showSpinner('检测新版本中')
   // 获取最新版本
-  const latestVersion = execSync(`npm show ${selfPkgInfo.name} version`, {
-    encoding: 'utf-8'
-  }).trim()
+  const latestVersion = execSync(
+    `npm show ${process.env.npm_package_name} version`,
+    {
+      encoding: 'utf-8'
+    }
+  ).trim()
   stopSpinner()
-  if (isVersionUpdated(selfPkgInfo.version.trim(), latestVersion)) {
+  if (
+    isVersionUpdated(process.env.npm_package_version!.trim(), latestVersion)
+  ) {
     log('upgrade', `检测到新版本 ${latestVersion}，请更新本工具`)
     if (!skipPrompts) {
       const { next } = await prompts({
@@ -48,7 +52,7 @@ export default async function prepareForArgs(
       log(
         'help',
         `${helpMessage}
-用法：${selfPkgInfo.name} [flags]
+用法：${process.env.npm_package_name} [flags]
 flags的值如下：
 -h, --help\t打印帮助信息
 -v, --version\t打印当前版本
@@ -58,7 +62,7 @@ flags的值如下：
     }
     // 版本信息
     if (['-v', '--version'].includes(args[0])) {
-      log('version', selfPkgInfo.version)
+      log('version', process.env.npm_package_version!)
       await upgradeValid()
       return false
     }

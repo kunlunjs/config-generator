@@ -1,4 +1,4 @@
-import { colorful, log, runCommand } from '../utils'
+import { colorful, getDepInstallCommand, log, runCommand } from '../utils'
 
 import { getPackageManager } from '../utils'
 import { availableConfigs, AvailableConfigKeys } from './generators'
@@ -70,17 +70,13 @@ export default async function run(selectedConfigKeys: AvailableConfigKeys[]) {
     const packageManager = await getPackageManager()
     const commands = []
     if (dependencies.length) {
-      commands.push(`${packageManager || 'npm'} i ${dependencies.join(' ')}`)
+      commands.push(getDepInstallCommand(packageManager, dependencies, false))
     }
     if (devDependencies.length) {
-      commands.push(
-        `${packageManager || 'npm'} ${
-          packageManager === 'yarn' ? 'add' : 'i'
-        } -D ${devDependencies.join(' ')}`
-      )
+      commands.push(getDepInstallCommand(packageManager, devDependencies, true))
     }
-    const _commands = commands.join('\n')
     if (!packageManager) {
+      const _commands = commands.join('\n')
       log(
         `install`,
         `建议使用 pnpm 或 yarn 进行包管理，不建议使用 npm 进行包管理，如需安装请执行 npm i -g pnpm/yarn，并在安装后执行\n${_commands.replace(
@@ -90,8 +86,10 @@ export default async function run(selectedConfigKeys: AvailableConfigKeys[]) {
       )
     } else {
       try {
-        log('install', _commands)
-        await runCommand(_commands)
+        for (const command of commands) {
+          log('install', command)
+          await runCommand(command)
+        }
       } catch (error) {
         log('install', '包安装失败', { error: true })
       }

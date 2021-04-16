@@ -1,7 +1,7 @@
 import { copyFileSync, readFileSync, unlinkSync, writeFileSync } from 'fs'
 import { join } from 'path'
 import { ensureFileSync } from 'fs-extra'
-import glob = require('fast-glob')
+// import copyTemplates from './copy'
 
 function run() {
   const pkgPath = join(__dirname, '../package.json')
@@ -22,11 +22,7 @@ function run() {
       delete pkgContent.publishConfig
       writeFileSync(pkgPath, JSON.stringify(pkgContent, null, 2))
       // 复制所有模板文件
-      glob.sync('src/generator/*/!(index.ts)').forEach(temPath => {
-        const copyTo = join(__dirname, '../', temPath.replace(/^src/, 'dist'))
-        ensureFileSync(copyTo)
-        copyFileSync(join(__dirname, '../', temPath), copyTo)
-      })
+      // copyTemplates()
     } else if (arg === 'after') {
       copyFileSync(tempPath, pkgPath)
       unlinkSync(tempPath)

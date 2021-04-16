@@ -18,11 +18,12 @@
   },
   "files": ["bin", "dist"],
   "scripts": {
+    "copy": "rsync -avzP src/generator dist --exclude=\"index.ts\"",
     "postinstall": "husky install",
     "prepublishOnly": "npm run build && ts-node scripts/publish.ts before",
     "postpublish": "ts-node scripts/publish.ts after",
     "lint": "eslint ./ --ext js,jsx,ts,tsx,json --quiet --fix",
-    "build": "tsc",
+    "build": "rm -rf dist && tsc && npm run copy",
     "start": "ts-node src/main.ts"
   },
   "dependencies": {

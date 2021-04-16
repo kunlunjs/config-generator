@@ -21,7 +21,7 @@ module.exports = {<% if (typescript) { %>
   plugins: [<% if (typescript) { %>'@typescript-eslint'<% } %>],
   rules: {
     // 'jsx-quotes': ['error', 'prefer-double']
-  },
+  }
   // overrides: [
   //   {
   //     files: ['config/*.js'],

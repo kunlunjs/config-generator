@@ -13,3 +13,13 @@ export function runCommand(command: string): Promise<boolean> {
       .once('error', () => resolve(false))
   })
 }
+
+export function getDepInstallCommand(
+  packageManager: string | null,
+  deps: string[],
+  isDev = true
+) {
+  return `${packageManager || 'npm'} ${
+    packageManager === 'yarn' ? 'add' : 'install'
+  }${isDev ? ' -D' : ''} ${deps.join(' ')}`
+}

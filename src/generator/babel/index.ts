@@ -24,6 +24,7 @@ const BabelGenerator: ConfigGenerator = {
   ],
   devDependencies: (selectedKeys: AvailableConfigKeys[]) => {
     const ret = [
+      '@babel/core',
       '@babel/preset-env',
       // 相同的函数抽离出来，同时避免全局变量污染
       '@babel/plugin-transform-runtime'
@@ -41,8 +42,14 @@ const BabelGenerator: ConfigGenerator = {
     )
   },
 
-  async generateConfig(): Promise<boolean> {
-    return generateFromTemplateFile(join(__dirname, '.babelrc.js'))
+  async generateConfig(
+    selectedConfigKeys: AvailableConfigKeys[]
+  ): Promise<boolean> {
+    return generateFromTemplateFile(join(__dirname, '.babelrc.js.tpl'), {
+      interpolationValues: {
+        typescript: selectedConfigKeys.includes('typescript')
+      }
+    })
   }
 }
 

@@ -9,12 +9,14 @@ import prepareForArgs, { helpMessage, upgradeValid } from './args'
 import { TemplateKyes } from './generator/interface'
 
 export async function run(args: string[]) {
+  // 命令行参数解析
   const prepare = await prepareForArgs(args)
   if (!prepare) return
   log('Help', helpMessage)
   if (await upgradeValid()) {
     return
   }
+  // 弹框选择
   await sleep(1000)
   try {
     const { selected } = await prompts([
@@ -36,9 +38,15 @@ export async function run(args: string[]) {
       }
     ])
     if (selected.length) {
-      // 确认初始化git
       const cwd = process.cwd()
+      // 确保package.json存在
+      if (!sync(join(cwd, 'package.json')).length) {
+        log('Package.json', '检测到 package.json 文件不存在，已为您自动创建')
+        execSync('npm init -y')
+      }
+      // 确认初始化git
       if (!sync(join(cwd, '.git')).length) {
+        log('git', '已为您自动初始化 git 仓库')
         execSync('git init', { cwd })
       }
       runGenerator(selected)
