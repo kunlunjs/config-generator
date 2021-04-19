@@ -2,21 +2,20 @@ import { execSync } from 'child_process'
 import prompts = require('prompts')
 import { log } from './utils'
 import { TemplateKyes } from './generator/interface'
-import { showSpinner, isVersionUpdated } from './utils'
+import { isVersionUpdated } from './utils'
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const currentPkgInfo = require('../package.json')
 
 export async function upgradeValid(skipPrompts = false) {
-  const stopSpinner = showSpinner('检测新版本中')
+  // const stopSpinner = showSpinner('检测新版本中')
+  log('version', '检测新版本中...')
   // 获取最新版本
-  const latestVersion = execSync(
-    `npm show ${process.env.npm_package_name} version`,
-    {
-      encoding: 'utf-8'
-    }
-  ).trim()
-  stopSpinner()
-  if (
-    isVersionUpdated(process.env.npm_package_version!.trim(), latestVersion)
-  ) {
+  const latestVersion = execSync(`npm show ${currentPkgInfo.name} version`, {
+    encoding: 'utf-8'
+  }).trim()
+  // stopSpinner()
+  if (isVersionUpdated(currentPkgInfo.version!.trim(), latestVersion)) {
     log('upgrade', `检测到新版本 ${latestVersion}，请更新本工具`)
     if (!skipPrompts) {
       const { next } = await prompts({
@@ -52,7 +51,7 @@ export default async function prepareForArgs(
       log(
         'help',
         `${helpMessage}
-用法：${process.env.npm_package_name} [flags]
+用法：${currentPkgInfo.name} [flags]
 flags的值如下：
 -h, --help\t打印帮助信息
 -v, --version\t打印当前版本
@@ -62,7 +61,7 @@ flags的值如下：
     }
     // 版本信息
     if (['-v', '--version'].includes(args[0])) {
-      log('version', process.env.npm_package_version!)
+      log('version', currentPkgInfo.version!)
       await upgradeValid()
       return false
     }
