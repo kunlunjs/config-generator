@@ -1,4 +1,9 @@
-module.exports = {<% if (typescript) { %>
+/**
+ * @type import('eslint').Linter.Config
+ * @link https://eslint.org/docs/user-guide/configuring
+ */
+module.exports = {
+  root: true,<% if (typescript) { %>
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2020
@@ -18,18 +23,29 @@ module.exports = {<% if (typescript) { %>
     'plugin:@typescript-eslint/recommended',<% } %><% if (prettier) { %>
     'plugin:prettier/recommended'<% } %>
   ],
-  plugins: [<% if (typescript) { %>'@typescript-eslint'<% } %>],
+  plugins: [<% if (typescript) { %>'@typescript-eslint'<% } %>, 'unused-imports', 'import'],
   rules: {
     // 'jsx-quotes': ['error', 'prefer-double']
+    '@typescript-eslint/no-unused-vars': 'off',
+    'unused-imports/no-unused-imports': 'warn',
+    'import/order': [
+      'error',
+      {
+        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object'],
+        alphabetize: {
+          order: 'asc'
+        }
+      }
+    ]
   }
   // overrides: [
   //   {
-  //     files: ['config/*.js'],
+  //     files: ['.*.*', '*rc', '*rc.js'],
   //     rules: {
-  //       'import/no-commonjs': 'off',
+  //       'import/no-commonjs': 'off'
   //     }
   //   }
-  // ],
+  // ]
   // settings: {
   //   react: {
   //     pragma: 'React',

@@ -31,7 +31,8 @@ const EslintGenerator: ConfigGenerator = {
       'eslint',
       'eslint-plugin-import',
       'eslint-plugin-node',
-      'eslint-plugin-promise'
+      'eslint-plugin-promise',
+      'eslint-plugin-unused-imports'
     ]
     if (selectedConfigKeys.includes('prettier')) {
       deps.push(...['eslint-config-prettier', 'eslint-plugin-prettier'])

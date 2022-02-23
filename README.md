@@ -37,4 +37,4 @@ npx fe-conf
 - `readme`
 - `stylelint`
 - `typescript`
-- `y2s`
+- `a2s`

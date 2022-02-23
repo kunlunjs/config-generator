@@ -16,7 +16,7 @@ import PrettierGenerator from './prettier'
 import ReadmeGenerator from './readme'
 import StylelintGenerator from './stylelint'
 import TypescriptGenerator from './typescript'
-import Y2sGenerator from './y2s'
+import A2SGenerator from './a2s'
 
 export const availableConfigs = {
   babel: BabelGenerator,
@@ -37,7 +37,7 @@ export const availableConfigs = {
   readme: ReadmeGenerator,
   stylelint: StylelintGenerator,
   typescript: TypescriptGenerator,
-  y2s: Y2sGenerator
+  a2s: A2SGenerator
 } as const
 
 export type AvailableConfigs = typeof availableConfigs

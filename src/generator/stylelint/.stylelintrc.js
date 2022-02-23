@@ -1,3 +1,7 @@
+/**
+ * @type import('stylelint').Config
+ * @link https://stylelint.io/user-guide/configure
+ */
 module.exports = {
   extends: [
     'stylelint-config-standard',

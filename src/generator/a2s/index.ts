@@ -2,12 +2,12 @@ import { join } from 'path'
 import { generateFromTemplateFile, commonConfigExisted } from '../../utils'
 import { ConfigGenerator } from '../interface'
 
-const Y2sGenerator: ConfigGenerator = {
-  key: 'y2s',
-  desc: 'Yapi to service code generator',
-  refUrl: 'https://www.npmjs.com/package/y2s',
-  file: '.y2src.js',
-  devDependencies: ['y2s'],
+const A2sGenerator: ConfigGenerator = {
+  key: 'a2s',
+  desc: 'OpenAPI/Swagger/YAPI to service code generator',
+  refUrl: 'https://www.npmjs.com/package/@zidong/a2s',
+  file: '.a2s.js',
+  devDependencies: ['@zidong/a2s'],
 
   checkExist(): Promise<boolean> {
     return commonConfigExisted(this.file!)
@@ -18,4 +18,4 @@ const Y2sGenerator: ConfigGenerator = {
   }
 }
 
-export default Y2sGenerator
+export default A2sGenerator

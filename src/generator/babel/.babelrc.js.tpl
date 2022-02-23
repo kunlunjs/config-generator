@@ -1,4 +1,7 @@
-// eslint-disable-next-line import/no-commonjs
+/**
+ * @type import('@babel/core').TransformOptions
+ * @link https://babeljs.io/docs/en/configuration
+ */
 module.exports = {
   presets: [
     [
