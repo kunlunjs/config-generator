@@ -2,6 +2,7 @@ import { execSync } from 'child_process'
 import prompts = require('prompts')
 import { sync } from 'fast-glob'
 import { join } from 'path'
+import { readFileSync, writeFileSync } from 'fs'
 import runGenerator from './generator'
 import { AvailableConfigKeys, availableConfigs } from './generator/generators'
 import { log, sleep } from './utils'
@@ -39,12 +40,18 @@ export async function run(args: string[]) {
     ])
     if (selected.length) {
       const cwd = process.cwd()
+      const pkgFile = join(cwd, 'package.json')
       // 确保package.json存在
-      if (!sync(join(cwd, 'package.json')).length) {
+      if (!sync(pkgFile).length) {
         log('Package.json', '检测到 package.json 文件不存在，已为您自动创建')
         execSync('npm init -y')
       }
-      // 确认初始化git
+      // 添加最低 node 版本要求
+      const pkg = JSON.parse(readFileSync(pkgFile, 'utf-8'))
+      pkg.engines = pkg.engines || {}
+      pkg.engines.node = '>=10.0.0'
+      writeFileSync(pkgFile, JSON.stringify(pkg, null, 2))
+      // 确认初始化 git
       if (!sync(join(cwd, '.git')).length) {
         log('git', '已为您自动初始化 git 仓库')
         execSync('git init', { cwd })

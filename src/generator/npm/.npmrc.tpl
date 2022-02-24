@@ -1,5 +1,7 @@
 loglevel=http
 progress=false
+enable-pre-post-scripts=true
+engine-strict=true
 
 registry=https://registry.npm.taobao.org
 
