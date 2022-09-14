@@ -3,7 +3,8 @@ import {
   commonConfigExisted,
   configInPackageJSON,
   generateFromTemplateFile,
-  globExisted
+  globExisted,
+  updatePkg
 } from '../../utils'
 import { ConfigGenerator } from '../interface'
 
@@ -17,7 +18,7 @@ const PrettierGenerator: ConfigGenerator = {
   },
   desc: 'An opinionated code formatter',
   refUrl: 'https://prettier.io/docs/en/configuration.html',
-  devDependencies: ['prettier'],
+  devDependencies: ['prettier', '@doremijs/prettier-config'],
   async checkExist(): Promise<boolean> {
     return (
       (await commonConfigExisted('prettier')) ||
@@ -29,7 +30,7 @@ const PrettierGenerator: ConfigGenerator = {
 
   async generateConfig(): Promise<boolean> {
     return (
-      (await generateFromTemplateFile(join(__dirname, '.prettierrc.js'))) &&
+      (await updatePkg(this.key, ['prettier'], '@doremijs/prettier-config')) &&
       (await generateFromTemplateFile(join(__dirname, '.prettierignore')))
     )
   }

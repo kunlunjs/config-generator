@@ -3,57 +3,133 @@
  * @link https://eslint.org/docs/user-guide/configuring
  */
 module.exports = {
-  root: true,<% if (typescript) { %>
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaVersion: 2020
-  },<% } %>
+  root: true,
   env: {
     es6: true,
-    jest: true,
-    // 如果不需要，可以卸载 eslint-plugin-node 和 eslint-plugin-promise 依赖
-    // 如果是NodeJs项目建议在 package.json 中开启 engine 的限制
     node: true,
     browser: true,
     mocha: true,
-    jasmine: true
+    jasmine: true,
+    jest: true
   },
-  extends: [
-    'eslint:recommended',<% if (typescript) { %>
-    'plugin:@typescript-eslint/recommended',<% } %><% if (prettier) { %>
-    'plugin:prettier/recommended'<% } %>
+  plugins: [
+    'simple-import-sort',
+    // 'jsx-a11y',
+    'n',
+    'promise',
+    'import'
   ],
-  plugins: [<% if (typescript) { %>'@typescript-eslint'<% } %>, 'unused-imports', 'import'],
+  extends: [
+    'eslint:recommended',
+    <% if (jest) { %>
+    'plugin:prettier/recommended',<% } %>
+    // 'plugin:react/jsx-runtime'
+    // 'plugin:react/recommended',
+    // 'plugin:react-hooks/recommended',
+    // 'plugin:jsx-a11y/recommended',
+    // 'plugin:vue/vue3-recommended',
+  ],
   rules: {
-    // 'jsx-quotes': ['error', 'prefer-double']
-    '@typescript-eslint/no-unused-vars': 'off',
-    'unused-imports/no-unused-imports': 'warn',
-    'import/order': [
-      'error',
-      {
-        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object'],
-        alphabetize: {
-          order: 'asc'
-        }
-      }
-    ]
-  }
-  // overrides: [
-  //   {
-  //     files: ['.*.*', '*rc', '*rc.js'],
-  //     rules: {
-  //       'import/no-commonjs': 'off'
-  //     }
-  //   }
-  // ]
+    'no-unused-vars': 'warn',
+    // TypeScript's `noFallthroughCasesInSwitch` option is more robust (#6906)
+    'default-case': 'off',
+    // 'tsc' already handles this (https://github.com/typescript-eslint/typescript-eslint/issues/291)
+    'no-dupe-class-members': 'off',
+    // 'tsc' already handles this (https://github.com/typescript-eslint/typescript-eslint/issues/477)
+    'no-undef': 'off',
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
+
+    // https://github.com/benmosher/eslint-plugin-import/tree/master/docs/rules
+    'import/export': 'error',
+    'import/first': 'error',
+    'import/no-absolute-path': ['error', { esmodule: true, commonjs: true, amd: false }],
+    'import/no-duplicates': 'error',
+    'import/no-named-default': 'error',
+    'import/no-webpack-loader-syntax': 'error',
+
+    // https://www.npmjs.com/package/eslint-plugin-n
+    'n/handle-callback-err': 'error',
+    'n/no-callback-literal': 'error',
+    'n/no-deprecated-api': 'error',
+    'n/no-exports-assign': 'error',
+    'n/no-new-require': 'error',
+    'n/no-path-concat': 'error',
+    'n/no-unsupported-features/es-builtins': 'error',
+    // 'n/no-unsupported-features/es-syntax': 'error',
+    'n/no-unsupported-features/node-builtins': 'error',
+    'n/process-exit-as-throw': 'error',
+
+    // https://www.npmjs.com/package/eslint-plugin-promise
+    'promise/param-names': 'error',
+  },
   // settings: {
   //   react: {
-  //     pragma: 'React',
-  //     // React version. 'detect' automatically picks the version you have installed.
-  //     // You can also use `16.0`, `16.3`, etc, if you want to override the detected value.
-  //     // default to latest and warns if missing
-  //     // It will default to 'detect' in the future
   //     version: 'detect',
   //   }
-  // }
+  // },
+  overrides: [
+    <% if (jest) { %>{
+      files: ['**/*.ts?(x)'],
+      parser: '@typescript-eslint/parser',
+      parserOptions: {
+        ecmaVersion: 2020,
+        tsconfigRootDir: process.cwd()
+        // project: ['./tsconfig.eslint.json', './packages/*/tsconfig.json']
+      },
+      plugins: ['@typescript-eslint'],
+      rules: {
+        // Add TypeScript specific rules (and turn off ESLint equivalents)
+        '@typescript-eslint/consistent-type-assertions': 'warn',
+        'no-array-constructor': 'off',
+        '@typescript-eslint/no-array-constructor': 'warn',
+        'no-redeclare': 'off',
+        '@typescript-eslint/no-redeclare': 'warn',
+        'no-use-before-define': 'off',
+        '@typescript-eslint/no-use-before-define': [
+          'warn',
+          {
+            functions: false,
+            classes: false,
+            variables: false,
+            typedefs: false
+          }
+        ],
+        'no-unused-expressions': 'off',
+        '@typescript-eslint/no-unused-expressions': [
+          'error',
+          {
+            allowShortCircuit: true,
+            allowTernary: true,
+            allowTaggedTemplates: true
+          }
+        ],
+        'no-unused-vars': 'off',
+        '@typescript-eslint/no-unused-vars': [
+          'warn',
+          {
+            args: 'none',
+            ignoreRestSiblings: true
+          }
+        ],
+        'no-useless-constructor': 'off',
+        '@typescript-eslint/no-useless-constructor': 'warn'
+        // '@typescript-eslint/no-unused-vars': ['warn', {
+        //   args: 'none',
+        //   ignoreRestSiblings: true,
+        // }],
+        // '@typescript-eslint/no-unsafe-assignment': 'warn',
+        // '@typescript-eslint/no-unsafe-call': 'warn',
+        // '@typescript-eslint/no-unsafe-return': 'warn',
+        // '@typescript-eslint/no-unsafe-member-access': 'warn'
+      }
+    }<% } %><% if (jest) { %>,
+    {
+      files: ['test/**', '*.spec.{js,ts}'],
+      plugins: ['jest'],
+      extends: ['plugin:jest/recommended'],
+      rules: { 'jest/prefer-expect-assertions': 'off' }
+    }<% } %>
+  ],
+  ignorePatterns: ['dist', 'node_modules', '**/{public,lib,libs}/**/*.js']
 }

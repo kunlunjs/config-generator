@@ -1,2 +1,33 @@
+# Compiled output
+dist
+node_modules
+
+# Logs
+logs
+*.log
+
+# OS
+.DS_Store
+
+# Tests
+/coverage
+/.nyc_output
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Lock files
+pnpm-lock.yaml
+
+# Libraries
 lib/
-dist/
+public/
+
+# Ignore files
+.*ignore

@@ -15,25 +15,25 @@ const EslintGenerator: ConfigGenerator = {
     full: true,
     node: true
   },
-  desc: 'Find and fix problems in your JavaScript code',
+  desc: 'Find and fix problems in your JS/TS code',
   refUrl: [
     {
       label: 'Reference',
       url: 'https://eslint.org/docs/user-guide/configuring/'
-    },
-    {
-      label: 'Best practices',
-      url: 'https://github.com/umijs/fabric'
     }
   ],
   devDependencies: (selectedConfigKeys: AvailableConfigKeys[]) => {
     const deps = [
       'eslint',
       'eslint-plugin-import',
-      'eslint-plugin-node',
+      'eslint-plugin-simple-import-sort',
+      'eslint-plugin-n',
       'eslint-plugin-promise',
       'eslint-plugin-unused-imports'
     ]
+    if (selectedConfigKeys.includes('jest')) {
+      deps.push(...['eslint-plugin-jest'])
+    }
     if (selectedConfigKeys.includes('prettier')) {
       deps.push(...['eslint-config-prettier', 'eslint-plugin-prettier'])
     }
@@ -62,7 +62,8 @@ const EslintGenerator: ConfigGenerator = {
       (await generateFromTemplateFile(join(__dirname, '.eslintrc.js.tpl'), {
         interpolationValues: {
           prettier: selectedConfigKeys.includes('prettier'),
-          typescript: selectedConfigKeys.includes('typescript')
+          typescript: selectedConfigKeys.includes('typescript'),
+          jest: selectedConfigKeys.includes('jest')
         }
       }))
     )

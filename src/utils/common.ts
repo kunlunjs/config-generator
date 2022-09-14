@@ -159,7 +159,7 @@ export async function generateFromTemplateFile(
           encoding: 'utf-8'
         })
       } catch (error) {
-        log('render', error.toString?.() ?? error, { error: true })
+        log('render', (error as any).toString?.() ?? error, { error: true })
       }
     }
     return true
